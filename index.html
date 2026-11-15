@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dnyanshree Certificate Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="main-header">
+    <h1>Dnyanshree Institute of Engineering & Technology</h1>
+    <p>AUTOMATIC CERTIFICATE GENERATOR</p>
+</header>
+
+<div class="container">
+
+    <section class="form">
+        <h2>Generate New Certificate</h2>
+
+        <form id="certificateForm">
+            <label>Student Name</label>
+            <input type="text" id="studentName" required>
+
+            <label>Achievement Description</label>
+            <textarea id="achievementDescription" required></textarea>
+
+            <label>Event / Activity Name</label>
+            <input type="text" id="courseName" required>
+
+            <label>Department</label>
+            <input type="text" id="department" required>
+
+            <label>Issue Date</label>
+            <input type="date" id="certificateDate" required>
+
+            <button type="submit">Generate Certificate</button>
+        </form>
+    </section>
+
+    
+
+<section class="certificate" id="certificate">
+
+    <!-- Decorative Elements -->
+    <div class="royal-watermark">D</div>
+
+    <div class="certificate-header">
+
+        <div class="institute-logo">
+            <img src="institute-logo.png" alt="Dnyanshree Institute Logo">
+        </div>
+
+        <div class="institute-details">
+            <h2>Dnyanshree Institute of Engineering & Technology</h2>
+            <p>SATARA, MAHARASHTRA</p>
+        </div>
+
+    </div>
+
+    <div class="certificate-content">
+
+        <p class="small-title">RECOGNITION OF EXCELLENCE</p>
+
+        <h1>CERTIFICATE</h1>
+
+        <div class="certificate-subtitle">
+            OF ACHIEVEMENT
+        </div>
+
+        <p class="presented-text">
+            This certificate is proudly presented to
+        </p>
+
+        <h2 id="previewName">Student Name</h2>
+
+        <p class="recognition-text">
+            In recognition of outstanding achievement
+            and contribution in
+        </p>
+
+        <h3 id="previewAchievement">
+            Achievement Description
+        </h3>
+
+        <p class="participation-text">
+            For participation / achievement in
+        </p>
+
+        <h3 id="previewCourse">
+            Event / Activity Name
+        </h3>
+
+        <div class="certificate-details">
+
+            <p>
+                DEPARTMENT:
+                <strong id="previewDepartment">Department Name</strong>
+            </p>
+
+            <p>
+                DATE OF ISSUE:
+                <strong id="previewDate">Date</strong>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="certificate-footer">
+
+        <div class="principal-signature">
+    <img
+        src="principal-signature.png"
+        alt="Principal Signature"
+        class="principal-signature-image"
+    >
+    <div class="signature-space"></div>
+    <p>PRINCIPAL</p>
+    </div>
+
+        <div class="qr-section">
+            <div id="certificateQRCode"></div>
+            <p>SCAN TO VERIFY</p>
+        </div>
+
+    </div>
+
+    <p class="cert-id" id="certificateId">
+        CERTIFICATE ID
+    </p>
+
+</section>
+
+
+
+    <button id="downloadBtn" type="button">
+        Download / Print Certificate
+    </button>
+
+    <section class="history-section">
+        <h2>Certificate History</h2>
+
+        <input
+            type="text"
+            id="searchCertificate"
+            placeholder="Search by Student Name or Certificate ID"
+        >
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Certificate ID</th>
+                    <th>Student Name</th>
+                    <th>Event</th>
+                    <th>Issue Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="certificateHistory">
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
