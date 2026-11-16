@@ -1008,3 +1008,49 @@ button:hover {
     }
 }
 
+/* MOBILE CERTIFICATE HISTORY FIX */
+
+@media screen and (max-width: 700px) {
+
+    .history-section,
+    .dashboard {
+        width: 96% !important;
+        padding: 15px !important;
+        margin: 20px auto !important;
+        overflow: hidden !important;
+    }
+
+    .history-section h2,
+    .dashboard h2 {
+        font-size: 18px !important;
+        line-height: 1.5;
+    }
+
+    #searchCertificate {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 13px !important;
+        margin-bottom: 15px;
+    }
+
+    .history-section table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .history-section th,
+    .history-section td {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .history-section button {
+        padding: 8px 12px !important;
+        font-size: 11px !important;
+        margin: 3px !important;
+    }
+}
+
