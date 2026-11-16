@@ -963,3 +963,48 @@ button:hover {
         font-size: 13px;
     }
 }
+
+/* MOBILE HEADER AND ADMIN PROFILE FIX */
+
+@media screen and (max-width: 700px) {
+
+    .main-header {
+        padding: 65px 12px 22px !important;
+    }
+
+    .admin-profile {
+        position: absolute !important;
+        top: 10px !important;
+        right: 10px !important;
+        z-index: 1000 !important;
+    }
+
+    #profileBtn {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        margin-top: 0 !important;
+    }
+
+    .main-header h1 {
+        font-size: 17px !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .main-header p {
+        font-size: 10px !important;
+        letter-spacing: 2px !important;
+    }
+
+    .main-header .main-nav {
+        margin-top: 18px !important;
+        gap: 7px !important;
+    }
+
+    .main-header .main-nav a {
+        padding: 8px 11px !important;
+        font-size: 12px !important;
+    }
+}
+
