@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Verification - Dnyanshree Institute</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .verify-container {
+            max-width: 700px;
+            margin: 45px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(16,36,72,0.09);
+        }
+
+        .verify-container h2 {
+            text-align: center;
+            color: #102448;
+            margin-bottom: 10px;
+        }
+
+        .verify-container > p {
+            text-align: center;
+            color: #667085;
+        }
+
+        .verify-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .verify-form input {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .verify-form button {
+            margin-top: 0;
+            white-space: nowrap;
+        }
+
+        .verify-result {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .verify-result.valid {
+            display: block;
+            background: #edf9f1;
+            border: 1px solid #239653;
+            color: #155b32;
+        }
+
+        .verify-result.invalid {
+            display: block;
+            background: #fff0f0;
+            border: 1px solid #dc3545;
+            color: #842029;
+        }
+
+        .verify-result h3 {
+            margin-top: 0;
+        }
+
+        .verified-details {
+            margin-top: 18px;
+            line-height: 1.8;
+        }
+
+        .verified-details p {
+            text-align: left;
+            color: inherit;
+            overflow-wrap: anywhere;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #102448;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media(max-width: 550px) {
+            .verify-container {
+                margin: 25px 15px;
+                padding: 20px;
+            }
+
+            .verify-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="main-header">
+    <h1>Dnyanshree Institute of Engineering & Technology</h1>
+    <p>CERTIFICATE VERIFICATION SYSTEM</p>
+</header>
+
+<main class="verify-container">
+
+    <h2>Verify Your Certificate</h2>
+
+    <p>
+        Enter your Certificate ID to verify the authenticity
+        of your certificate.
+    </p>
+
+    <form id="verifyForm" class="verify-form">
+
+        <input
+            type="text"
+            id="verifyCertificateId"
+            placeholder="Enter Certificate ID"
+            required
+        >
+
+        <button type="submit" id="verifyBtn">
+            Verify Certificate
+        </button>
+
+    </form>
+
+    <div
+        id="verifyResult"
+        class="verify-result"
+        aria-live="polite">
+    </div>
+
+    <a href="index.html" class="back-link">
+        ← Back to Certificate Generator
+    </a>
+
+</main>
+
+<script>
+const verifyForm = document.getElementById("verifyForm");
+const verifyResult = document.getElementById("verifyResult");
+const verifyBtn = document.getElementById("verifyBtn");
+const certificateInput = document.getElementById("verifyCertificateId");
+
+const urlParams = new URLSearchParams(window.location.search);
+const urlCertificateId = urlParams.get("certificateId");
+
+async function verifyCertificate(certificateId) {
+
+    if (!certificateId) return;
+
+    verifyResult.className = "verify-result";
+    verifyResult.style.display = "block";
+    verifyResult.textContent = "Verifying certificate...";
+
+    verifyBtn.disabled = true;
+
+    try {
+
+        const response = await fetch(
+            "/api/verify?certificateId=" +
+            encodeURIComponent(certificateId)
+        );
+
+        const data = await response.json();
+
+        if (data.valid && data.certificate) {
+
+            const cert = data.certificate;
+
+            verifyResult.className = "verify-result valid";
+            verifyResult.replaceChildren();
+
+            const heading = document.createElement("h3");
+            heading.textContent = "✓ VALID CERTIFICATE";
+
+            const message = document.createElement("p");
+            message.textContent =
+                "This certificate is successfully verified.";
+
+            const details = document.createElement("div");
+            details.className = "verified-details";
+
+            const fields = [
+                ["Certificate ID", cert.certificateId],
+                ["Student Name", cert.studentName],
+                ["Achievement", cert.achievementDescription],
+                ["Event / Activity", cert.courseName],
+                ["Department", cert.department],
+                ["Issue Date", cert.certificateDate]
+            ];
+
+            fields.forEach(([label, value]) => {
+
+                const p = document.createElement("p");
+                const strong = document.createElement("strong");
+
+                strong.textContent = label + ": ";
+
+                p.append(
+                    strong,
+                    document.createTextNode(value || "Not Available")
+                );
+
+                details.appendChild(p);
+            });
+
+            verifyResult.append(heading, message, details);
+
+        } else {
+
+            verifyResult.className = "verify-result invalid";
+            verifyResult.textContent =
+                "✕ CERTIFICATE NOT FOUND. Please check your Certificate ID.";
+        }
+
+    } catch (error) {
+
+        console.error("Verification Error:", error);
+
+        verifyResult.className = "verify-result invalid";
+        verifyResult.textContent =
+            "Unable to connect to the server. Please try again.";
+
+    } finally {
+
+        verifyBtn.disabled = false;
+    }
+}
+
+
+// Manual verification
+verifyForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    verifyCertificate(certificateInput.value.trim());
+});
+
+
+// Automatic verification through QR Code
+if (urlCertificateId) {
+
+    certificateInput.value = urlCertificateId;
+
+    verifyCertificate(urlCertificateId);
+}
+</script>
+
+</body>
+</html>
