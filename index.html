@@ -7,7 +7,7 @@
 
     <title>Dnyanshree Certificate Generator</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 
     <script>
     document.addEventListener("DOMContentLoaded", async function () {
@@ -29,17 +29,38 @@
 </head>
 <body>
 
+
 <header class="main-header">
     <h1>Dnyanshree Institute of Engineering & Technology</h1>
     <p>AUTOMATIC CERTIFICATE GENERATOR</p>
-    <button id="logoutBtn" type="button">
-    LOGOUT
-</button>
+
+    <nav class="main-nav">
+        <a href="/" class="active">Home</a>
+        <a href="#generate">Generate</a>
+        <a href="/verify.html">Verify</a>
+        <a href="#dashboard">Dashboard</a>
+    </nav>
+
+    
+
+<div class="admin-profile">
+    <button id="profileBtn" type="button">
+        👤 Admin ⌄
+    </button>
+
+    <div id="profileDropdown" class="profile-dropdown">
+        <p>Administrator</p>
+        <button id="logoutBtn" type="button">
+            Logout
+        </button>
+    </div>
+</div>
+
 </header>
 
 <div class="container">
 
-    <section class="form">
+    <section class="form" id="generate">
         <h2>Generate New Certificate</h2>
 
         <form id="certificateForm">
@@ -162,7 +183,7 @@
         Download / Print Certificate
     </button>
 
-    <section class="history-section">
+    <section class="history-section" id="dashboard">
         <h2>Certificate History</h2>
 
         <input
@@ -207,6 +228,20 @@ document.getElementById("logoutBtn").addEventListener("click", async function ()
         }
     } catch (error) {
         alert("Server connection failed.");
+    }
+});
+</script>
+<script>
+document.getElementById("profileBtn").addEventListener("click", function () {
+    document.getElementById("profileDropdown").classList.toggle("show");
+});
+
+// Dropdown बाहेर क्लिक केल्यास बंद होईल
+document.addEventListener("click", function (event) {
+    const profile = document.querySelector(".admin-profile");
+
+    if (!profile.contains(event.target)) {
+        document.getElementById("profileDropdown").classList.remove("show");
     }
 });
 </script>
