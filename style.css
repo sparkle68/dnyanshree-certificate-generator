@@ -917,3 +917,49 @@ button:hover {
         font-size: 11px;
     }
 }
+
+/* FIX NAVIGATION MENU VISIBILITY */
+
+.main-header .main-nav {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 100 !important;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px auto 10px;
+}
+
+.main-header .main-nav a {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 6px;
+}
+
+.main-header .main-nav a:hover,
+.main-header .main-nav a.active {
+    background: #d4af37 !important;
+    color: #172554 !important;
+    border-color: #d4af37 !important;
+}
+
+@media (max-width: 600px) {
+    .main-header .main-nav {
+        gap: 8px;
+    }
+
+    .main-header .main-nav a {
+        padding: 9px 13px;
+        font-size: 13px;
+    }
+}
