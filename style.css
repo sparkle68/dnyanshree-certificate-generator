@@ -26,14 +26,24 @@ body {
 
 /* WEBSITE HEADER */
 
+
 .main-header {
     position: relative;
-    background: linear-gradient(135deg, #030d1d, #10294d, #071a36);
+    isolation: isolate;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(3, 13, 29, 0.72),
+            rgba(16, 41, 77, 0.68),
+            rgba(7, 26, 54, 0.75)
+        ),
+        url("college-bg.jpg") center center / cover no-repeat;
     color: white;
     text-align: center;
     padding: 30px 15px;
     border-bottom: 4px solid var(--gold);
 }
+
 
 .main-header h1 {
     margin: 0;
