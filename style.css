@@ -1064,3 +1064,76 @@ button:hover {
     }
 }
 
+
+/* MOBILE PDF PRINT - FULL PAGE FIX */
+
+@media print {
+    @page {
+        size: A4 landscape !important;
+        margin: 0 !important;
+    }
+
+    html,
+    body {
+        width: 297mm !important;
+        height: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    #certificate {
+        position: absolute !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        min-height: 210mm !important;
+        max-height: 210mm !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* FIX: PREVENT EXTRA BLANK PRINT PAGE */
+
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        width: 297mm !important;
+        height: 210mm !important;
+        min-height: 210mm !important;
+        max-height: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+    }
+
+    body {
+        position: relative !important;
+    }
+
+    #certificate {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        min-height: 210mm !important;
+        max-height: 210mm !important;
+        margin: 0 !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        page-break-inside: avoid !important;
+        break-after: avoid-page !important;
+        break-before: avoid-page !important;
+        break-inside: avoid-page !important;
+        overflow: hidden !important;
+    }
+}
